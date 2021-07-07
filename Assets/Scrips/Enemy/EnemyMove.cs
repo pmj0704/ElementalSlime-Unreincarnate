@@ -70,7 +70,6 @@ public class EnemyMove : MonoBehaviour
 
     protected virtual void Update()
     {
-        
         if(transform.position.y > gameManager.MaxPosition.y + 2f) Despawn(gameObject);
         if(transform.position.y < gameManager.MinPosition.y - 2f) Despawn(gameObject);
         if(transform.position.x > gameManager.MaxPosition.y) Despawn(gameObject);

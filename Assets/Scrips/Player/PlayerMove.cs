@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     public bool Thunder = false;
     public bool Stone = false;
     public bool Flame = false;
+    private float nspeed;
     #endregion
 
     #region 발사
@@ -56,6 +57,15 @@ public class PlayerMove : MonoBehaviour
             InstantiateOrPool();
             yield return new WaitForSeconds(bulletDelay);
         }
+    }
+    public void Stop()
+    {
+        nspeed = speed;
+        speed = 0;
+    }
+    public void Resume()
+    {
+        speed = nspeed;
     }
    private GameObject InstantiateOrPool()
     {
@@ -120,6 +130,10 @@ public class PlayerMove : MonoBehaviour
                 bulletDelay = 0.3f;
                 Flame = true;
                 break;
+                
+                case "Heart":
+                gameManager.getLife(4);
+                break;
             } 
         }
         else if(collision.CompareTag("Debuff"))
@@ -133,7 +147,7 @@ public class PlayerMove : MonoBehaviour
                 break;
             }
         }
-        else{
+        else if(!(collision.CompareTag("Dummy"))){
         if (isDamaged) return;
         Dead();
         }

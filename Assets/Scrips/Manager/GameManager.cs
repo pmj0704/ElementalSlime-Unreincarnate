@@ -30,11 +30,12 @@ public class GameManager : MonoBehaviour
 
     #endregion
     #region 적 프리팹
+    [Header("더미 프리팹")] [SerializeField] private GameObject Dummy = null;
     [Header("바람 프리팹")] [SerializeField] private GameObject windPrefab = null;
     [Header("바람 생성 시간")] [SerializeField] private float windDealy = 0f;
-    [Header("돌 프리팹")] [SerializeField] private GameObject enemyStone = null;
+    [Header("돌 프리팹")] [SerializeField] protected GameObject enemyStone = null;
     [Header("픽시 프리팹")] [SerializeField] private GameObject enemyPixi = null;
-    [Header("뱀 프리팹")] [SerializeField] private GameObject enemySnake = null;
+    [Header("뱀 프리팹")] [SerializeField] protected GameObject enemySnake = null;
     [Header("잠자리 프리팹")] [SerializeField] GameObject enemyDragonFly = null;
     [Header("파스 프리팹")] [SerializeField] GameObject enemyFlameMob = null;
     [Header("아이템이 있는 적")] [SerializeField] GameObject[] enemiesWithItem = null;
@@ -67,6 +68,7 @@ public class GameManager : MonoBehaviour
     private bool counting = false;
     private bool wind =true;
     private BackGroundMove backGroundMove = null;
+    [SerializeField] private bool tuto = false;
     #endregion
 
     #region 시작, 업데이트
@@ -86,6 +88,7 @@ public class GameManager : MonoBehaviour
         FogPosition = new Vector2(-0.08f, 10.57f);
         
         #region 적 소환
+        if(!tuto){
         if(stage == 1){
         spawnHelpEnemy(enemyStone, 231233f, 6f);
         spawnHelpEnemy(enemySnake, 3123123f, 6f);
@@ -97,6 +100,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Wait());
         if(wind)StartCoroutine(SpawnWind());
         StartCoroutine(randomItemEnemySpawn());
+        }
         #endregion
 
         #region UI
@@ -363,7 +367,7 @@ public class GameManager : MonoBehaviour
         float randomDelay1 = Random.Range(3f, 10f);
          yield return new WaitForSeconds(randomDelay1);
 
-         if (randomEnemy == 2)  {Instantiate(enemiesWithItem[randomEnemy], new Vector2(3f, randomY), Quaternion.identity);}
+         if (randomEnemy == 4)  {Instantiate(enemiesWithItem[randomEnemy], new Vector2(3f, randomY), Quaternion.identity);}
          else {Instantiate(enemiesWithItem[randomEnemy], new Vector2(randomX, 6f), Quaternion.identity);}
 
          yield return new WaitForSeconds(randomDelay1);

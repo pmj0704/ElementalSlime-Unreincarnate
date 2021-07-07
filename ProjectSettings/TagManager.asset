@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Item
   - Debuff
+  - Dummy
   layers:
   - Default
   - TransparentFX
