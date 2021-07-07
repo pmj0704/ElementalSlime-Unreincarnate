@@ -12,7 +12,6 @@ public class TextTyping : MonoBehaviour
     [SerializeField]private GameObject nameType;
     [SerializeField]private GameObject YesOrNo;
     private Camera cam;
-
     private Name nm = null;
    private string t_text;
    public int textNum = 0;

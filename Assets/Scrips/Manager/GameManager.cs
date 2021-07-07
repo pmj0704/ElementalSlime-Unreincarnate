@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [Header("용암 스테이지")][SerializeField] private Texture2D LavaTexture;
     [Header("안개")][SerializeField] private GameObject Fog;
     [Header("스테이지 이름")][SerializeField] private UnityEngine.UI.Text StageText;
+    private PlayFabManager playFabManager = null;
     #endregion 
     #region 카메라
     [SerializeField]private Camera mainCamera;
@@ -111,6 +112,9 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        if(playFabManager == null){
+        playFabManager = FindObjectOfType<PlayFabManager>();}
+
         if(Input.GetKeyDown(KeyCode.F9))Hack();
         if(Input.GetKeyDown(KeyCode.F10))AddScore(1000);
         if(Input.GetKeyDown(KeyCode.F11))AddScore(500);

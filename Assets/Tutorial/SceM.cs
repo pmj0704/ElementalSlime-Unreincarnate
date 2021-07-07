@@ -13,11 +13,6 @@ public class SceM : MonoBehaviour
         textTyping = FindObjectOfType<TextTyping>();
         StartCoroutine(FirstAni());
     }
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F9))Time.timeScale += 1f;
-        if(Input.GetKeyDown(KeyCode.F10))Time.timeScale -= 1f;
-    }
     private IEnumerator FirstAni()
     {
         yield return new WaitForSeconds (0.8f);

@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class Name : MonoBehaviour
 {
+    private SaveName saveName = null;
+
     [SerializeField] UnityEngine.UI.Text NameText;
     private string nameOver;
     public string playerName;
     private TextTyping textTyping = null;
+    void Start()
+    {
+        saveName = FindObjectOfType<SaveName>();
+    }
     void Update()
     {
         textTyping = FindObjectOfType<TextTyping>();
@@ -16,6 +22,7 @@ public class Name : MonoBehaviour
     public void off()
     {
             playerName = NameText.text;
+            saveName.GetName(playerName);
             textTyping.St(playerName);
             this.gameObject.SetActive(false);
     }

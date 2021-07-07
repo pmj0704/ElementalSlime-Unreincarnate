@@ -20,7 +20,10 @@ public class GameOverManager : MonoBehaviour
     public bool onSound = true;
     private bool onLic = true;
     private bool quitingMessageOn = false;
+    private PlayFabManager playFabManager = null;
+    private int a = 0;
     
+    [Header("리더 보드")][SerializeField] private GameObject LB;
     [Header("종료 버튼")] [SerializeField] private GameObject quitingMessage;
     [Header("소리")] public AudioListener audioListener;
     [Header("설명")] [SerializeField] private GameObject discr;
@@ -32,17 +35,30 @@ public class GameOverManager : MonoBehaviour
     [Header("소리 버튼")] [SerializeField] GameObject SoundBT;
     [Header("라이선스 버튼")] [SerializeField] GameObject Licence;
     [Header("설명 페이지")] [SerializeField] Sprite[] pages;
+    private int highscore;
     #endregion
 
     void Start()
     {
+        playFabManager = FindObjectOfType<PlayFabManager>();
+         highscore = (PlayerPrefs.GetInt("HIGHSCORE",0));
+         StartCoroutine(wait());
         StartCoroutine(SpawnCloud());
         textHighScore.text = string.Format("HIGHSCORE {0}", PlayerPrefs.GetInt("HIGHSCORE", 0));
         MinPosition = new Vector2(-2f, -4.3f);
         MaxPosition = new Vector2(2f, 4.3f);
         poolManager = FindObjectOfType<PoolManager>();
         audioListener = FindObjectOfType<AudioListener>();
-
+    }
+    private IEnumerator wait()
+    {
+        yield return new WaitForSeconds(3f);
+        Debug.Log(highscore);
+        playFabManager.SendLeaderboard(highscore);
+        for(int i = 0; i < 10; i++)
+        {
+            playFabManager.GetLeaderboard();
+        }
     }
     void Update()
     {
@@ -50,7 +66,7 @@ public class GameOverManager : MonoBehaviour
        else if(quitingMessageOn && Input.GetKeyDown(KeyCode.Escape))
         {
             quitingMessage.SetActive(false);
-        quitingMessageOn = false;
+            quitingMessageOn = false;
             Time.timeScale = 1f;
         }
         if (num == 0 && helpOn)
@@ -178,4 +194,12 @@ public class GameOverManager : MonoBehaviour
         }
     }
     #endregion
+    public void Rank()
+    {
+        LB.SetActive(true);
+    }
+    public void RankOff()
+    {
+        LB.SetActive(false);
+    }
 }
