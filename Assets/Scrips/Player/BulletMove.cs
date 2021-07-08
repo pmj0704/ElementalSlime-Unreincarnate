@@ -55,5 +55,9 @@ public class BulletMove : MonoBehaviour
         {
             animator.Play("FlameBullet");
         }
+        else if(playerMove.Harpy)
+        {
+            animator.Play("Harpy");
+        }
     }
 }

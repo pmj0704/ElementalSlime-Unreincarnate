@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [Header("바탕")] [SerializeField] private GameObject BackGround;
     [Header("스테이지 패널")] [SerializeField] private GameObject StagePanel;
     [Header("용암 스테이지")][SerializeField] private Texture2D LavaTexture;
+    [Header("바다 스테이지")][SerializeField] private Texture2D seaTexture;
     [Header("안개")][SerializeField] private GameObject Fog;
     [Header("스테이지 이름")][SerializeField] private UnityEngine.UI.Text StageText;
     private PlayFabManager playFabManager = null;
@@ -31,12 +32,12 @@ public class GameManager : MonoBehaviour
 
     #endregion
     #region 적 프리팹
-    [Header("더미 프리팹")] [SerializeField] private GameObject Dummy = null;
     [Header("바람 프리팹")] [SerializeField] private GameObject windPrefab = null;
     [Header("바람 생성 시간")] [SerializeField] private float windDealy = 0f;
     [Header("돌 프리팹")] [SerializeField] protected GameObject enemyStone = null;
     [Header("픽시 프리팹")] [SerializeField] private GameObject enemyPixi = null;
-    [Header("뱀 프리팹")] [SerializeField] protected GameObject enemySnake = null;
+    [Header("트롤 프리팹")] [SerializeField] private GameObject enemyTroll = null;
+    [Header("뱀 프리팹")] [SerializeField] private GameObject enemySnake = null;
     [Header("잠자리 프리팹")] [SerializeField] GameObject enemyDragonFly = null;
     [Header("파스 프리팹")] [SerializeField] GameObject enemyFlameMob = null;
     [Header("아이템이 있는 적")] [SerializeField] GameObject[] enemiesWithItem = null;
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region 변수 목록
+    public int Lhigh = 100000;
     public int stage =1;
     private PlayerMove playerMove = null;
     private SpriteRenderer spriteRenderer = null;
@@ -93,6 +95,7 @@ public class GameManager : MonoBehaviour
         if(stage == 1){
         spawnHelpEnemy(enemyStone, 231233f, 6f);
         spawnHelpEnemy(enemySnake, 3123123f, 6f);
+        spawnHelpEnemy(enemyTroll, 3123123f, 6f);
         }
         if(stage == 2)
         {
@@ -125,11 +128,15 @@ public class GameManager : MonoBehaviour
             Quit.SetActive(false);
             StartCoroutine(WaitFSec());
         }
-    if(score >= (2000 + highScore/8) && bossActivate) 
+    if(score >= (1000 + highScore/8) && bossActivate) 
     {
         for(int i = 0; i < 20; i++)shake();
         bossGolem.SetActive(true);
         bossActivate = false;
+    }
+    if(score == (Lhigh + 1000))
+    {
+        SeaStage();
     }
     if(life < 5){
         lifeSpriteRen.sprite = Life[life];
@@ -327,6 +334,9 @@ public class GameManager : MonoBehaviour
                     case 1:
                         spawnHelpEnemy(enemyStone, randomX, 6f);
                         break;
+                    case 2:
+                        spawnHelpEnemy(enemyTroll, randomX, 6f);
+                        break;
                     case 3:
                         StartCoroutine(SpawnDragonfly());
                         break;
@@ -364,7 +374,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds (5f);
         int randomEnemy = 100;
         if(stage == 1) randomEnemy = Random.Range(0,3);
-        else if(stage == 2) randomEnemy = Random.Range(3,6);
+        else if(stage == 2) randomEnemy = Random.Range(3,4);
+        else if(stage == 3) randomEnemy = Random.Range(4,6);
 
         float randomX = Random.Range(-1.7f, 1.7f);
         float randomY=Random.Range(-1.4f,MaxPosition.y -2f);
@@ -411,10 +422,13 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     #region 스테이지
-    
+    public void SetLhigh()
+    {
+        Lhigh = score;
+    }
     public void lavaStage()
     {
-        StageText.text = string.Format("초심자의 화산");
+        StageText.text = string.Format("휴화산");
         spawnHelpEnemy(enemyFlameMob, 3123123f, 6f);
         StartCoroutine(LS());
     }
@@ -423,7 +437,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds (3f);
         wind = false;
         Instantiate(Fog, FogPosition, Quaternion.identity);
-        stage++;
+        stage = 2;
         yield return new WaitForSeconds (2.5f);
         StartCoroutine(backGroundMove.NextLavaStage());
         yield return new WaitForSeconds (1f);
@@ -434,5 +448,36 @@ public class GameManager : MonoBehaviour
     {
         life = 99;
         playerMove.Hack();
+    }
+    public void SeaStage()
+    {
+        StageText.text = string.Format("깊은 심해");
+        StartCoroutine(SS());
+    } 
+    private IEnumerator SS()
+    {
+        yield return new WaitForSeconds (3f);
+        wind = false;
+        Instantiate(Fog, FogPosition, Quaternion.identity);
+        stage = 3;
+        yield return new WaitForSeconds (2.5f);
+        StartCoroutine(backGroundMove.NextSeaStage());
+        yield return new WaitForSeconds (1f);
+        StartCoroutine(FadeStage());
+    }
+    public void SkyStage()
+    {
+        StageText.text = string.Format("세상의 끝, 눈의 시작");
+        StartCoroutine(SK());
+    } private IEnumerator SK()
+    {
+        yield return new WaitForSeconds (3f);
+        wind = true;
+        Instantiate(Fog, FogPosition, Quaternion.identity);
+        stage = 4;
+        yield return new WaitForSeconds (2.5f);
+        StartCoroutine(backGroundMove.NextSkyStage());
+        yield return new WaitForSeconds (1f);
+        StartCoroutine(FadeStage());
     }
 }

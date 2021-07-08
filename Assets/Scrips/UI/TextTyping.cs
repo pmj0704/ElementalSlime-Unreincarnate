@@ -23,10 +23,13 @@ public class TextTyping : MonoBehaviour
    [SerializeField]private GameObject MCanvas;
    [SerializeField]private Canvas mainCanvas;
    [SerializeField] private GameObject textBox;
+   private bool end = false;
    private Dummy dummy = null;
 
     void Start()
     {
+        if(end){
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");}
         StartCoroutine(Fst());
         nm = FindObjectOfType<Name>();
     }

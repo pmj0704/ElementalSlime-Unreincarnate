@@ -114,6 +114,7 @@ public class BossPArt : MonoBehaviour
 
     #region 보스 처치
     private IEnumerator killBoss(){
+            gameManager.SetLhigh();
             bossGolem.GetComponent<SpriteRenderer>().material.SetColor("_Color", new Color(0.5f, 0.4f, 0f ,0f));
             bossGolem.GetComponent<Animator>().Play("Boom");
             audioSource.Play();

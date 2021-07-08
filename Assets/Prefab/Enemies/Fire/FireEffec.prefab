@@ -155,3 +155,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 1.9
+  FlameMob: {fileID: 7058729282750638532, guid: 09cf84255ee24d9498573a871b727ee1, type: 3}

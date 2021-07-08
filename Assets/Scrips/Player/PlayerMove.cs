@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     public bool Thunder = false;
     public bool Stone = false;
     public bool Flame = false;
+    public bool Harpy = false;
     private float nspeed;
     #endregion
 
@@ -103,6 +104,7 @@ public class PlayerMove : MonoBehaviour
             switch(item.Name)
             {
                 case "Thunder":
+                Harpy = false;
                 Stone = false;
                 Flame = false;
                 StartCoroutine(Blip(2));
@@ -114,6 +116,7 @@ public class PlayerMove : MonoBehaviour
 
                 case "Stone":
                 Thunder = false;
+                Harpy = false;
                 Flame = false;
                 StartCoroutine(Blip(2));
                 gameManager.getLife(6);
@@ -124,11 +127,22 @@ public class PlayerMove : MonoBehaviour
                 case "Flame":
                 Thunder = false;
                 Stone = false;
+                Harpy = false;
                 StartCoroutine(Blip(2));
                 gameManager.getLife(4);
                 animator.Play("Fire");
                 bulletDelay = 0.3f;
                 Flame = true;
+                break;
+                case "Harpy":
+                Thunder = false;
+                Stone = false;
+                Flame = false;
+                StartCoroutine(Blip(2));
+                gameManager.getLife(4);
+                animator.Play("Harp");
+                bulletDelay = 0.2f;
+                Harpy = true;
                 break;
                 
                 case "Heart":
@@ -145,6 +159,12 @@ public class PlayerMove : MonoBehaviour
                 case "Stoned":
                 StartCoroutine(Stoned());
                 break;
+                case "Freeze":
+                StartCoroutine(Freeze());
+                break;
+                case "Harp":
+                StartCoroutine(Harp());
+                break;
             }
         }
         else if(!(collision.CompareTag("Dummy"))){
@@ -157,6 +177,23 @@ public class PlayerMove : MonoBehaviour
         speed = 0;
         spriteRenderer.material.SetColor("_Color", new Color(0.3f,0.3f,0.3f,1f));
         yield return new WaitForSeconds (2f);
+        spriteRenderer.material.SetColor("_Color", new Color(1f,1f,1f,1f));
+        speed = 5;
+    }
+    private IEnumerator Freeze()
+    {
+        speed = 1;
+        spriteRenderer.material.SetColor("_Color", new Color(0.3f,0.9680373f,1f,1f));
+        yield return new WaitForSeconds (4f);
+        spriteRenderer.material.SetColor("_Color", new Color(1f,1f,1f,1f));
+        speed = 5;
+    }
+    private IEnumerator Harp()
+    {
+        speed = 3;
+        for(float i = 0; i < 2f; i += Time.deltaTime)transform.position += Vector3.up * speed * Time.deltaTime;
+        spriteRenderer.material.SetColor("_Color", new Color(0.9811321f,0.4304022f,0.5f,1f));
+        yield return new WaitForSeconds (3f);
         spriteRenderer.material.SetColor("_Color", new Color(1f,1f,1f,1f));
         speed = 5;
     }

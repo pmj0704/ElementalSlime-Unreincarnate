@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3053b235375ef46b78d409a30ca293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getsFaster: 1
   isFire: 0
   sizeChange: 0
   hasAni: 0
@@ -144,7 +145,7 @@ MonoBehaviour:
   hasItem: 0
   isDragonFly: 1
   score: 150
-  hp: 4
+  hp: 3
   speed: 2
   item: {fileID: 0}
   sprite: []

@@ -14,8 +14,10 @@ public class EnemyMove : MonoBehaviour
     private BossManager bossManager = null;
     private AudioSource audioSource = null;
     #endregion
-
+    protected int cor = 0;
+    protected int fire = 0;
     #region 불변수들
+    [SerializeField] private bool getsFaster = true;
     protected bool isDead = false;
     protected bool isDamaged = false;
     private bool isStop = false;
@@ -44,7 +46,7 @@ public class EnemyMove : MonoBehaviour
 
     private float shotingtime;
     private int direction = 0;
-    private float ownSpeed;
+    protected float ownSpeed;
     private int ownHp;
 
     #endregion
@@ -77,7 +79,8 @@ public class EnemyMove : MonoBehaviour
 
         if(gameManager.stage != 1 && stage == 1)Destroy(gameObject);
         else if (gameManager.stage != 2 && stage == 2)Destroy(gameObject);
-        if(isFire)StartCoroutine(startFire());
+        if(isFire && fire == 0)
+        {StartCoroutine(startFire());}
         #region 좌우로 움직이는 적
         if (!isVertical)transform.Translate(Vector2.down * ownSpeed * Time.deltaTime);
         else {
@@ -89,7 +92,7 @@ public class EnemyMove : MonoBehaviour
         #endregion
        
 
-        if (!isDamaged && Time.timeScale == 1f) ownSpeed += 0.01f; 
+        if (!isDamaged && Time.timeScale == 1f && getsFaster) ownSpeed += 0.01f; 
     }
     #region 총알 발사
     private IEnumerator startFire()
@@ -190,9 +193,10 @@ public class EnemyMove : MonoBehaviour
     }
     public void State()
     {
+        cor = 0;
+        if(isFire)lazer.SetActive(false);
         ownSpeed = speed;
         Started();
-        direction = 0;
         hp = ownHp;
         isDead = false;
         isDamaged = false;

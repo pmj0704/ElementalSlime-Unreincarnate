@@ -7,6 +7,8 @@ public class BackGroundMove : MonoBehaviour
     [SerializeField]
     private float speed = 1f;
     [SerializeField] Texture2D Lava;
+    [SerializeField] Texture2D Sea;
+    [SerializeField] Texture2D Sky;
     private MeshRenderer meshRenderer = null;
     private Material material = null;
     private Vector2 offset = Vector2.zero;
@@ -26,5 +28,15 @@ public class BackGroundMove : MonoBehaviour
         {
             yield return new WaitForSeconds (0f);
             meshRenderer.material.SetTexture("_MainTex",Lava);
+        }
+    public IEnumerator NextSeaStage()
+        {
+            yield return new WaitForSeconds (0f);
+            meshRenderer.material.SetTexture("_MainTex",Sea);
+        }
+        public IEnumerator NextSkyStage()
+        {
+            yield return new WaitForSeconds (0f);
+            meshRenderer.material.SetTexture("_MainTex",Sky);
         }
 }

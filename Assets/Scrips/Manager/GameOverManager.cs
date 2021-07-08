@@ -21,7 +21,6 @@ public class GameOverManager : MonoBehaviour
     private bool onLic = true;
     private bool quitingMessageOn = false;
     private PlayFabManager playFabManager = null;
-    private int a = 0;
     
     [Header("리더 보드")][SerializeField] private GameObject LB;
     [Header("종료 버튼")] [SerializeField] private GameObject quitingMessage;
@@ -44,7 +43,7 @@ public class GameOverManager : MonoBehaviour
          highscore = (PlayerPrefs.GetInt("HIGHSCORE",0));
          StartCoroutine(wait());
         StartCoroutine(SpawnCloud());
-        textHighScore.text = string.Format("HIGHSCORE {0}", PlayerPrefs.GetInt("HIGHSCORE", 0));
+        textHighScore.text = string.Format("HIGHSCORE\n {0}", PlayerPrefs.GetInt("HIGHSCORE", 0));
         MinPosition = new Vector2(-2f, -4.3f);
         MaxPosition = new Vector2(2f, 4.3f);
         poolManager = FindObjectOfType<PoolManager>();
@@ -52,7 +51,7 @@ public class GameOverManager : MonoBehaviour
     }
     private IEnumerator wait()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
         Debug.Log(highscore);
         playFabManager.SendLeaderboard(highscore);
         for(int i = 0; i < 10; i++)
@@ -138,6 +137,7 @@ public class GameOverManager : MonoBehaviour
    }
    public void HelpOff()
    {
+            discr.SetActive(false);
        help.SetActive(false);
        helpOn = false;
    }
