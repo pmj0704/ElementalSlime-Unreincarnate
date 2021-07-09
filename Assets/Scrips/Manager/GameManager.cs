@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(Wait());
         if(wind)StartCoroutine(SpawnWind());
-       StartCoroutine(randomItemEnemySpawn());
+        StartCoroutine(randomItemEnemySpawn());
         }
         #endregion
 
@@ -151,10 +151,7 @@ public class GameManager : MonoBehaviour
             tryOnce5 = false;
         }
 
-        if(Input.GetKeyDown(KeyCode.F9))Hack();
-        if(Input.GetKeyDown(KeyCode.F10))AddScore(1000);
-        if(Input.GetKeyDown(KeyCode.F11))AddScore(500);
-        if(Input.GetKeyDown(KeyCode.F12))Time.timeScale +=1f;
+        
         if(!counting && !BackMsgOn && Input.GetKeyDown(KeyCode.Escape))GoBack();
         else if(!counting && BackMsgOn && Input.GetKeyDown(KeyCode.Escape))
         {

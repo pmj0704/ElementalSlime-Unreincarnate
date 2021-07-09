@@ -126,7 +126,7 @@ MonoBehaviour:
   Slow: 1
   hasItem: 0
   isDragonFly: 0
-  score: 0
+  score: 50
   hp: 3
   speed: 3
   item: {fileID: 0}
