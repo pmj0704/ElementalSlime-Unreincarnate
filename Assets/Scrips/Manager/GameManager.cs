@@ -70,13 +70,27 @@ public class GameManager : MonoBehaviour
     private bool BackMsgOn = false;
     private bool counting = false;
     private bool wind =true;
+    private Transform cam;
     private BackGroundMove backGroundMove = null;
+    private bool tryOnce = true;
+    private bool tryOnce2 = true;
+    private bool tryOnce3 = false;
+    private bool tryOnce4 = false;
+    private bool tryOnce5 = false;
     [SerializeField] private bool tuto = false;
+    [SerializeField] private GameObject enemyMuna;
+    [SerializeField] private GameObject enemyStarFish;
+    [SerializeField] private GameObject enemyKraKen;
+    [SerializeField] private GameObject enemySnow;
+    [SerializeField] private GameObject enemyHarpy;
+
+
     #endregion
 
     #region 시작, 업데이트
     void Start()
     {
+        Lhigh = 100000;
         cameraPos = mainCamera.transform.position;
         backGroundMove = FindObjectOfType<BackGroundMove>();
         enemyMove = FindObjectOfType<EnemyMove>();
@@ -99,11 +113,12 @@ public class GameManager : MonoBehaviour
         }
         if(stage == 2)
         {
-        spawnHelpEnemy(enemyFlameMob, 231233f, 6f);
+        StartCoroutine(SpawnDragonfly(enemyDragonFly));
+
         }
         StartCoroutine(Wait());
         if(wind)StartCoroutine(SpawnWind());
-        StartCoroutine(randomItemEnemySpawn());
+       StartCoroutine(randomItemEnemySpawn());
         }
         #endregion
 
@@ -118,6 +133,24 @@ public class GameManager : MonoBehaviour
         if(playFabManager == null){
         playFabManager = FindObjectOfType<PlayFabManager>();}
 
+        if(stage == 2 && tryOnce3)
+        {
+            waitLava();
+            tryOnce3 = false;
+        }
+        if(stage == 3 && tryOnce4)
+        {
+            Instantiate(enemyKraKen); 
+            waitSea();
+            tryOnce4 = false;
+        }
+        if(stage == 4 && tryOnce5)
+        {
+            Instantiate(enemyKraKen); 
+            waitSky();
+            tryOnce5 = false;
+        }
+
         if(Input.GetKeyDown(KeyCode.F9))Hack();
         if(Input.GetKeyDown(KeyCode.F10))AddScore(1000);
         if(Input.GetKeyDown(KeyCode.F11))AddScore(500);
@@ -130,13 +163,21 @@ public class GameManager : MonoBehaviour
         }
     if(score >= (1000 + highScore/8) && bossActivate) 
     {
-        for(int i = 0; i < 20; i++)shake();
         bossGolem.SetActive(true);
         bossActivate = false;
     }
-    if(score == (Lhigh + 1000))
+
+    if(score >= (Lhigh + 1000) && tryOnce)
     {
+        
+        stage = 3;
         SeaStage();
+        tryOnce = false;
+    }if(score >= (Lhigh + 2000) && tryOnce2)
+    {
+        stage = 4;
+        SkyStage();
+        tryOnce2 = false;
     }
     if(life < 5){
         lifeSpriteRen.sprite = Life[life];
@@ -166,7 +207,14 @@ public class GameManager : MonoBehaviour
     public void No()
     {
         Quit.SetActive(false);
+        
+        if(!tuto){
         StartCoroutine(WaitFSec());
+        }
+        else if(tuto)
+        {
+            Time.timeScale = 1f;
+        }
     }
     public void Ads()
     {
@@ -241,14 +289,6 @@ public class GameManager : MonoBehaviour
         }
         StagePanel.SetActive(false);
     }
-    private void shake()
-    {
-        float cameraPosX = Random.value * 0.05f * 2 - 0.05f;
-        float cameraPosY = Random.value * 0.05f * 2 - 0.05f;
-        cameraPos.x += cameraPosX;
-        cameraPos.y += cameraPosY;
-        mainCamera.transform.position = cameraPos;
-    }
     #endregion
     
     public void Shrink()
@@ -298,13 +338,22 @@ public class GameManager : MonoBehaviour
         float randomY = 0f;
         float randomDelay = 0f;
         int randomEnemy = 0;
+        tryOnce3 = true;
         while(true)
         {
             randomY = Random.Range(-2f, MaxPosition.y - 2f);
             randomX = Random.Range(MinPosition.x, MaxPosition.x);
             randomDelay = Random.Range(1f, 4f);
             if(stage == 1)randomEnemy = Random.Range(0,3);
-            else if(stage == 2)randomEnemy = Random.Range(3,6);
+            else if(stage == 2){
+                randomEnemy = Random.Range(3,5);
+                }
+                else if(stage == 3){
+                randomEnemy = Random.Range(5,7);
+                }
+                else if(stage == 4){
+                randomEnemy = Random.Range(7,10);
+                }
             SpawnEnemy(randomX, randomY,randomEnemy);
             yield return new WaitForSeconds(randomDelay);
         }
@@ -338,17 +387,32 @@ public class GameManager : MonoBehaviour
                         spawnHelpEnemy(enemyTroll, randomX, 6f);
                         break;
                     case 3:
-                        StartCoroutine(SpawnDragonfly());
+                        StartCoroutine(SpawnDragonfly(enemyDragonFly));
                         break;
                     case 4:
                         spawnHelpEnemy(enemyFlameMob, randomX, 6f);
+                        break;
+                    case 5:
+                        StartCoroutine(SpawnDragonfly(enemyMuna));
+                        break;
+                    case 6:
+                        spawnHelpEnemy(enemyStarFish, randomX, 6f);
+                        break;
+                    case 7:
+                        StartCoroutine(SpawnDragonfly(enemyHarpy));
+                        break;
+                    case 8:
+                        StartCoroutine(SpawnDragonfly(enemySnow));
+                        break;
+                    case 9:
+                        spawnHelpEnemy(enemyPixi, randomX, 6f);
                         break;
                     case 100:
                         break;
                 }               
             }
    }
-    private IEnumerator SpawnDragonfly()
+    private IEnumerator SpawnDragonfly(GameObject gameObject)
     {
         float ranY = 0f;
         float ranD = 0f;
@@ -359,7 +423,7 @@ public class GameManager : MonoBehaviour
             ranD = Random.Range(5f, 12f);
             break;
         }
-            Instantiate(enemyDragonFly, new Vector2(3.3f, ranY), Quaternion.identity);
+            Instantiate(gameObject, new Vector2(3.3f, ranY), Quaternion.identity);
             yield return new WaitForSeconds(ranD);
     }
     private void spawnHelpEnemy(GameObject Enemy, float X, float Y)
@@ -376,6 +440,7 @@ public class GameManager : MonoBehaviour
         if(stage == 1) randomEnemy = Random.Range(0,3);
         else if(stage == 2) randomEnemy = Random.Range(3,4);
         else if(stage == 3) randomEnemy = Random.Range(4,6);
+        else if(stage == 4) randomEnemy = Random.Range(6,8);
 
         float randomX = Random.Range(-1.7f, 1.7f);
         float randomY=Random.Range(-1.4f,MaxPosition.y -2f);
@@ -451,6 +516,7 @@ public class GameManager : MonoBehaviour
     }
     public void SeaStage()
     {
+        stage = 3;
         StageText.text = string.Format("깊은 심해");
         StartCoroutine(SS());
     } 
@@ -472,12 +538,36 @@ public class GameManager : MonoBehaviour
     } private IEnumerator SK()
     {
         yield return new WaitForSeconds (3f);
-        wind = true;
+        wind =false;
         Instantiate(Fog, FogPosition, Quaternion.identity);
         stage = 4;
         yield return new WaitForSeconds (2.5f);
         StartCoroutine(backGroundMove.NextSkyStage());
         yield return new WaitForSeconds (1f);
         StartCoroutine(FadeStage());
+    }
+    private IEnumerator waitLava()
+    {
+        yield return new WaitForSeconds (2f);
+        StartCoroutine(SpawnDragonfly(enemyDragonFly));
+        Instantiate(enemyFlameMob, new Vector2(MaxPosition.x, MaxPosition.y), Quaternion.identity);
+    }
+    private IEnumerator waitSea()
+    {
+        yield return new WaitForSeconds (2f);
+        Instantiate(enemyKraKen); 
+        StartCoroutine(SpawnDragonfly(enemyMuna));
+        Instantiate(enemyStarFish, new Vector2(MaxPosition.x, MaxPosition.y-2f), Quaternion.identity);
+    }
+     private IEnumerator waitSky()
+    {
+        yield return new WaitForSeconds (2f);
+        StartCoroutine(SpawnDragonfly(enemyHarpy));
+        StartCoroutine(SpawnDragonfly(enemySnow));
+        Instantiate(enemyPixi, new Vector2(MaxPosition.x, MaxPosition.y-2f), Quaternion.identity);
+    }
+    public void Quitit()
+    {
+        Application.Quit();
     }
 }

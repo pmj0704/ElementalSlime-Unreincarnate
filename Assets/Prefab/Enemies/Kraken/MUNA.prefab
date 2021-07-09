@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 1706017214989964534}
   - component: {fileID: 1706017214989964532}
   - component: {fileID: 1706017214989964533}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MUNA
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,16 +126,17 @@ MonoBehaviour:
   Slow: 1
   hasItem: 0
   isDragonFly: 1
-  score: 100
-  hp: 7
+  score: 0
+  hp: 3
   speed: 3
   item: {fileID: 0}
   sprite: []
   lazer: {fileID: 0}
-  stage: 0
+  stage: 3
   shotDeley: 1.3
   FireDelay: 0
   fireWait: 0.3
+  isKRA: 0
 --- !u!82 &1706017214989964534
 AudioSource:
   m_ObjectHideFlags: 0

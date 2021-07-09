@@ -22,7 +22,7 @@ public class EnemyMove : MonoBehaviour
     protected bool isDamaged = false;
     private bool isStop = false;
 
-    [Header("총알, 레이저를 쏘는가?")] [SerializeField] private bool isFire = false;
+    [Header("총알, 레이저를 쏘는가?")] [SerializeField] protected bool isFire = false;
     [Header("크기를 바꾸는가?")] [SerializeField]private bool sizeChange = false;
     [Header("맞았을 때 애니메이션이 있는가?")] [SerializeField] private bool hasAni = false;
     [Header("옆으로 가는가?")] [SerializeField] private bool isVertical = false;
@@ -39,10 +39,11 @@ public class EnemyMove : MonoBehaviour
     [Header("아이템")] [SerializeField] private GameObject item = null;
     [Header("맞았을 때 바뀌는 모습")] [SerializeField] private Sprite[] sprite = null;
     [Header("레이저")] [SerializeField] GameObject lazer = null;
-    [Header("스테이지")][SerializeField] private int stage;
+    [Header("스테이지")][SerializeField] protected int stage;
     [Header("총알 발사 시간")][SerializeField]private float shotDeley = 1.3f;
     [Header("총알 발사 간격")][SerializeField]private float FireDelay = 0f;
     [Header("총알 지속 시간")][SerializeField]private float fireWait = 0.3f;
+    public bool isKRA = false;
 
     private float shotingtime;
     private int direction = 0;
@@ -72,13 +73,16 @@ public class EnemyMove : MonoBehaviour
 
     protected virtual void Update()
     {
+        if(stage == 3 && isKRA && !isDead)gameObject.SetActive(true);
         if(transform.position.y > gameManager.MaxPosition.y + 2f) Despawn(gameObject);
         if(transform.position.y < gameManager.MinPosition.y - 2f) Despawn(gameObject);
         if(transform.position.x > gameManager.MaxPosition.y) Despawn(gameObject);
         if(transform.position.x < gameManager.MinPosition.y) Despawn(gameObject);
 
         if(gameManager.stage != 1 && stage == 1)Destroy(gameObject);
-        else if (gameManager.stage != 2 && stage == 2)Destroy(gameObject);
+        if (gameManager.stage != 2 && stage == 2)Destroy(gameObject);
+        if (gameManager.stage != 3 && stage == 3)Destroy(gameObject);
+        if (gameManager.stage != 4 && stage == 4)Destroy(gameObject);
         if(isFire && fire == 0)
         {StartCoroutine(startFire());}
         #region 좌우로 움직이는 적
@@ -95,7 +99,7 @@ public class EnemyMove : MonoBehaviour
         if (!isDamaged && Time.timeScale == 1f && getsFaster) ownSpeed += 0.01f; 
     }
     #region 총알 발사
-    private IEnumerator startFire()
+    protected IEnumerator startFire()
     {
           shotingtime+=Time.deltaTime;
         if(shotingtime>shotDeley){

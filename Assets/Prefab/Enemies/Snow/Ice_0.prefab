@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8982484954472244966}
   - component: {fileID: 7788428329409509126}
   - component: {fileID: 4651137750038240005}
-  m_Layer: 0
+  - component: {fileID: 6182618624997136455}
+  m_Layer: 6
   m_Name: Ice_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,3 +152,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6182618624997136455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7914866398254387405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b2a14bf4fea06547931e34a44d89577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Debuff: Freeze

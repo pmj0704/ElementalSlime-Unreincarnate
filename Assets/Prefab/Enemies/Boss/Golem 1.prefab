@@ -508,10 +508,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74862244a50da0f4793de6cfa3ac58b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 95
   speed: 0
   Dir: 0
+  hp: 95
   isMove: 0
+  newArm: []
+  mainPart: 0
+  bossGolem: {fileID: 0}
 --- !u!1 &6264375731408041419
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,7 +941,7 @@ GameObject:
   - component: {fileID: 8566397619955483506}
   m_Layer: 9
   m_Name: Golem 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1631,10 +1634,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74862244a50da0f4793de6cfa3ac58b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 11
   speed: 5
   Dir: 0
+  hp: 11
   isMove: 0
+  newArm: []
+  mainPart: 0
+  bossGolem: {fileID: 0}
 --- !u!1 &6264375732450277197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1944,10 +1950,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74862244a50da0f4793de6cfa3ac58b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 15
   speed: 5
   Dir: 0
+  hp: 15
   isMove: 0
+  newArm: []
+  mainPart: 0
+  bossGolem: {fileID: 0}
 --- !u!1 &6264375732925429164
 GameObject:
   m_ObjectHideFlags: 0

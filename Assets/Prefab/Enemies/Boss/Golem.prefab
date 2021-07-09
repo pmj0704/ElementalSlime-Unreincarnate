@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2309921879576564842}
   - component: {fileID: 2309921879576564840}
   - component: {fileID: 2309921879576564843}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LegR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 2309921879714619536}
   - component: {fileID: 2309921879714619550}
   - component: {fileID: 2309921879714619537}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpikeL_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 2309921879854275268}
   - component: {fileID: 2309921879854275266}
   - component: {fileID: 2309921879854275269}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: armL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2309921879990531765}
   - component: {fileID: 2309921879990531762}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StoneS_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,9 +438,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2309921879991556774}
-  m_Layer: 0
+  - component: {fileID: -9126711815563360267}
+  m_Layer: 9
   m_Name: Golem
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -472,6 +473,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-9126711815563360267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309921879991556761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b834f086ca51943a3e8748413ae3a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arm:
+  - {fileID: 0}
+  - {fileID: 0}
+  mainBody: {fileID: 0}
+  newArm: []
+  spikeL: []
+  spikeM: []
+  spikeS: []
+  Bullder: {fileID: 0}
+  Leg: []
+  newBullet: {fileID: 0}
+  ShootingPos: []
+  armPos: []
+  player: {fileID: 0}
 --- !u!1 &2309921880053305961
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +510,7 @@ GameObject:
   - component: {fileID: 2309921880053305974}
   - component: {fileID: 2309921880053305972}
   - component: {fileID: 2309921880053305975}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpikeS_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +625,7 @@ GameObject:
   - component: {fileID: 2309921880120044580}
   - component: {fileID: 2309921880120044578}
   - component: {fileID: 2309921880120044581}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LegL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +741,7 @@ GameObject:
   - component: {fileID: 2309921880126392712}
   - component: {fileID: 2309921880126392726}
   - component: {fileID: 2309921880126392713}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpikeL_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -830,7 +857,7 @@ GameObject:
   - component: {fileID: 2309921880582671211}
   - component: {fileID: 2309921880582671209}
   - component: {fileID: 2309921880582671208}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpikeM_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +972,7 @@ GameObject:
   - component: {fileID: 2309921880842753782}
   - component: {fileID: 2309921880842753780}
   - component: {fileID: 2309921880842753783}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1078,7 +1105,7 @@ GameObject:
   - component: {fileID: 2309921880847864875}
   - component: {fileID: 2309921880847864873}
   - component: {fileID: 2309921880847864872}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpikeM_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1192,7 +1219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2309921880873158169}
   - component: {fileID: 2309921880873158182}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StoneS_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1275,7 +1302,7 @@ GameObject:
   - component: {fileID: 2309921881566319367}
   - component: {fileID: 2309921881566319365}
   - component: {fileID: 2309921881566319364}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: armR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1390,7 +1417,7 @@ GameObject:
   - component: {fileID: 2309921881629231597}
   - component: {fileID: 2309921881629231595}
   - component: {fileID: 2309921881629231594}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpikeS_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}

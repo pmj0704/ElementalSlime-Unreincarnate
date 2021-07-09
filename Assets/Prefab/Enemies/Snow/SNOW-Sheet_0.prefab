@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 3379369848584120020}
   - component: {fileID: 3379369848584120023}
   - component: {fileID: 3379369848584120022}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SNOW-Sheet_0
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,14 +262,15 @@ MonoBehaviour:
   isDragonFly: 1
   score: 100
   hp: 7
-  speed: 0
-  item: {fileID: 7070662731408379599}
+  speed: 1
+  item: {fileID: 0}
   sprite: []
   lazer: {fileID: 7070662731408379599}
-  stage: 0
+  stage: 4
   shotDeley: 1.3
   FireDelay: 0
   fireWait: 0.3
+  isKRA: 0
 --- !u!1001 &1150470998677544450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -326,8 +327,16 @@ PrefabInstance:
       value: Ice_0
       objectReference: {fileID: 0}
     - target: {fileID: 7914866398254387405, guid: 8d851c18d6a32934f98648f65b44cbf1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914866398254387405, guid: 8d851c18d6a32934f98648f65b44cbf1, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914866398254387405, guid: 8d851c18d6a32934f98648f65b44cbf1, type: 3}
+      propertyPath: m_TagString
+      value: Debuff
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d851c18d6a32934f98648f65b44cbf1, type: 3}

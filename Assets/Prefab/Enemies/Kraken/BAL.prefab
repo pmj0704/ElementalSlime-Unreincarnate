@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 4111752231840279666}
   - component: {fileID: 4111752231840279661}
   - component: {fileID: 4111752231840279667}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BAL
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,16 +126,17 @@ MonoBehaviour:
   Slow: 1
   hasItem: 0
   isDragonFly: 0
-  score: 100
+  score: 0
   hp: 3
   speed: 3
   item: {fileID: 0}
   sprite: []
   lazer: {fileID: 0}
-  stage: 1
+  stage: 3
   shotDeley: 1.3
   FireDelay: 0
   fireWait: 0.3
+  isKRA: 0
 --- !u!58 &4111752231840279666
 CircleCollider2D:
   m_ObjectHideFlags: 0

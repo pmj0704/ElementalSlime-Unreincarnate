@@ -257,7 +257,7 @@ public class TextTyping : MonoBehaviour
         t_text = "?? 갑자기 사라졌다.";
         StartCoroutine(typing(t_text));
         yield return new WaitForSeconds (2f);
-        t_text = "그럼 시작해 볼까?";
+        t_text = "그럼 시작 해 볼까?";
         StartCoroutine(typing(t_text));
         yield return new WaitForSeconds (3f);
         next = 5;

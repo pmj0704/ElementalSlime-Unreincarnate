@@ -11,9 +11,11 @@ public class GameOverManager : MonoBehaviour
     public Vector2 MaxPosition { get; private set; }
     public PoolManager poolManager { get; private set; }
     [Header("구름 모양")] [SerializeField] private GameObject[] spriteCloud = null;
-    #endregion
+    private DontDistroy dontDistroy = null;
+        #endregion
 
     #region UI
+    
     private int num = 0;
     private bool onSetting = true;
     private bool helpOn = false;
@@ -35,10 +37,14 @@ public class GameOverManager : MonoBehaviour
     [Header("라이선스 버튼")] [SerializeField] GameObject Licence;
     [Header("설명 페이지")] [SerializeField] Sprite[] pages;
     private int highscore;
+    
+    [SerializeField] private GameObject tutoBT;
+    [SerializeField] private GameObject X;
     #endregion
 
     void Start()
     {
+        dontDistroy = FindObjectOfType<DontDistroy>();
         playFabManager = FindObjectOfType<PlayFabManager>();
          highscore = (PlayerPrefs.GetInt("HIGHSCORE",0));
          StartCoroutine(wait());
@@ -201,5 +207,19 @@ public class GameOverManager : MonoBehaviour
     public void RankOff()
     {
         LB.SetActive(false);
+    }
+    public void TutorialListen()
+    {
+           tutoBT.SetActive(true);
+           X.SetActive(true);
+    }
+    public void GotoTuto()
+    {
+       dontDistroy.hadListenTuto = true;
+        SceneManager.LoadScene("Tutorial");
+    }
+    public void TutoOFf()
+    {
+           tutoBT.SetActive(false);
     }
 }
