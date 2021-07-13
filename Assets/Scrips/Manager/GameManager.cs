@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
     #region UI
     [Header("최고 점수")][SerializeField] private UnityEngine.UI.Text textScore = null;
@@ -83,22 +83,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject enemyKraKen;
     [SerializeField] private GameObject enemySnow;
     [SerializeField] private GameObject enemyHarpy;
-
-    private static GameManager instance = null;
-    public static GameManager Instance
-    {
-        get{
-            if(instance == null)
-            {
-                instance = FindObjectOfType<GameManager>();
-                if(instance == null)
-                {
-                    instance = new GameObject("GameManager").AddComponent<GameManager>();
-                }
-            }
-            return instance;
-        }
-    }
     #endregion
 
     #region 시작, 업데이트
