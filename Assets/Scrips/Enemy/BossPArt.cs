@@ -107,20 +107,20 @@ public class BossPArt : MonoBehaviour
     }
      private void DespawnB(GameObject Object)
     {
-        Object.transform.SetParent(gameManager.poolManager.transform, false);
+        Object.transform.SetParent(GameManager.Instance.poolManager.transform, false);
         Object.SetActive(false);
     }
     #endregion
 
     #region 보스 처치
     private IEnumerator killBoss(){
-            gameManager.SetLhigh();
+            GameManager.Instance.SetLhigh();
             bossGolem.GetComponent<SpriteRenderer>().material.SetColor("_Color", new Color(0.5f, 0.4f, 0f ,0f));
             bossGolem.GetComponent<Animator>().Play("Boom");
             audioSource.Play();
             yield return new WaitForSeconds(0.4f);
-            gameManager.getLife(4);
-            gameManager.lavaStage();
+            GameManager.Instance.getLife(4);
+            GameManager.Instance.lavaStage();
             bossGolem.SetActive(false);
     }
     #endregion

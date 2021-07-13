@@ -84,7 +84,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject enemySnow;
     [SerializeField] private GameObject enemyHarpy;
 
-
+    private static GameManager instance = null;
+    public static GameManager Instance
+    {
+        get{
+            if(instance == null)
+            {
+                instance = FindObjectOfType<GameManager>();
+                if(instance == null)
+                {
+                    instance = new GameObject("GameManager").AddComponent<GameManager>();
+                }
+            }
+            return instance;
+        }
+    }
     #endregion
 
     #region 시작, 업데이트

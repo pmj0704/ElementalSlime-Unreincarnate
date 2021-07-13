@@ -31,14 +31,14 @@ public class BulletMove : MonoBehaviour
     }
     protected virtual void CheckLimit()
     {
-        if (transform.position.y > gameManager.MaxPosition.y + 0.4f) Despawn();
-        if (transform.position.y < gameManager.MinPosition.y - 2f) Despawn();
-        if (transform.position.x > gameManager.MaxPosition.x + 2f) Despawn();
-        if (transform.position.x < gameManager.MinPosition.x - 2f) Despawn();
+        if (transform.position.y > GameManager.Instance.MaxPosition.y + 0.4f) Despawn();
+        if (transform.position.y < GameManager.Instance.MinPosition.y - 2f) Despawn();
+        if (transform.position.x > GameManager.Instance.MaxPosition.x + 2f) Despawn();
+        if (transform.position.x < GameManager.Instance.MinPosition.x - 2f) Despawn();
     }
     private void Despawn()
     {
-        transform.SetParent(gameManager.poolManager.transform, false);
+        transform.SetParent(GameManager.Instance.poolManager.transform, false);
         gameObject.SetActive(false);
     }
     private void checkAni()

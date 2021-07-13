@@ -22,10 +22,10 @@ public class MeonBulley : MonoBehaviour
         }
         transform.Translate(Vector2.right * speed * Time.deltaTime, Space.Self);
         
-        if (transform.position.y > gameManager.MaxPosition.y + 0.4f) Despawn(gameObject);
-        if (transform.position.y < gameManager.MinPosition.y - 2f) Despawn(gameObject);
-        if (transform.position.x > gameManager.MaxPosition.x + 2f) Despawn(gameObject);
-        if (transform.position.x < gameManager.MinPosition.x - 2f) Despawn(gameObject);
+        if (transform.position.y > GameManager.Instance.MaxPosition.y + 0.4f) Despawn(gameObject);
+        if (transform.position.y < GameManager.Instance.MinPosition.y - 2f) Despawn(gameObject);
+        if (transform.position.x > GameManager.Instance.MaxPosition.x + 2f) Despawn(gameObject);
+        if (transform.position.x < GameManager.Instance.MinPosition.x - 2f) Despawn(gameObject);
     }
     public IEnumerator AutoDesapwn()
     {
@@ -35,7 +35,7 @@ public class MeonBulley : MonoBehaviour
     public void Despawn(GameObject GO)
     {
         dead = true;
-        GO.transform.SetParent(gameManager.enemyBulletManager.transform);
+        GO.transform.SetParent(GameManager.Instance.enemyBulletManager.transform);
         GO.transform.position = new Vector2(0,0);
         GO.SetActive(false);
     }

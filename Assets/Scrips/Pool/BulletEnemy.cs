@@ -18,14 +18,14 @@ public class BulletEnemy : BulletMove
     }
     protected override void CheckLimit()
     {
-        if (transform.position.y > gameManager.MaxPosition.y + 1f) Despawn();
-        if (transform.position.y < gameManager.MinPosition.y - 2f) Despawn();
-        if (transform.position.x > gameManager.MaxPosition.x + 2f) Despawn();
-        if (transform.position.x < gameManager.MinPosition.x - 2f) Despawn();
+        if (transform.position.y > GameManager.Instance.MaxPosition.y + 1f) Despawn();
+        if (transform.position.y < GameManager.Instance.MinPosition.y - 2f) Despawn();
+        if (transform.position.x > GameManager.Instance.MaxPosition.x + 2f) Despawn();
+        if (transform.position.x < GameManager.Instance.MinPosition.x - 2f) Despawn();
     }
     private void Despawn()
     {
-        transform.SetParent(gameManager.enemyBulletManager.transform, false);
+        transform.SetParent(GameManager.Instance.enemyBulletManager.transform, false);
         gameObject.SetActive(false);
     }
 }

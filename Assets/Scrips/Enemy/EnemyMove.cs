@@ -74,15 +74,15 @@ public class EnemyMove : MonoBehaviour
     protected virtual void Update()
     {
         if(stage == 3 && isKRA && !isDead)gameObject.SetActive(true);
-        if(transform.position.y > gameManager.MaxPosition.y + 2f) Despawn(gameObject);
-        if(transform.position.y < gameManager.MinPosition.y - 2f) Despawn(gameObject);
-        if(transform.position.x > gameManager.MaxPosition.y) Despawn(gameObject);
-        if(transform.position.x < gameManager.MinPosition.y) Despawn(gameObject);
+        if(transform.position.y > GameManager.Instance.MaxPosition.y + 2f) Despawn(gameObject);
+        if(transform.position.y < GameManager.Instance.MinPosition.y - 2f) Despawn(gameObject);
+        if(transform.position.x > GameManager.Instance.MaxPosition.y) Despawn(gameObject);
+        if(transform.position.x < GameManager.Instance.MinPosition.y) Despawn(gameObject);
 
-        if(gameManager.stage != 1 && stage == 1)Destroy(gameObject);
-        if (gameManager.stage != 2 && stage == 2)Destroy(gameObject);
-        if (gameManager.stage != 3 && stage == 3)Destroy(gameObject);
-        if (gameManager.stage != 4 && stage == 4)Destroy(gameObject);
+        if(GameManager.Instance.stage != 1 && stage == 1)Destroy(gameObject);
+        if (GameManager.Instance.stage != 2 && stage == 2)Destroy(gameObject);
+        if (GameManager.Instance.stage != 3 && stage == 3)Destroy(gameObject);
+        if (GameManager.Instance.stage != 4 && stage == 4)Destroy(gameObject);
         if(isFire && fire == 0)
         {StartCoroutine(startFire());}
         #region 좌우로 움직이는 적
@@ -90,8 +90,8 @@ public class EnemyMove : MonoBehaviour
         else {
             if (isStop) return;
             transform.Translate(Vector2.right * ownSpeed/2 * direction * Time.deltaTime + Vector2.down * ownSpeed/2 * Time.deltaTime);
-            if (transform.position.x >= gameManager.MaxPosition.x) direction = -1;
-            if (transform.position.x <= gameManager.MinPosition.x) direction = 1;
+            if (transform.position.x >= GameManager.Instance.MaxPosition.x) direction = -1;
+            if (transform.position.x <= GameManager.Instance.MinPosition.x) direction = 1;
         }
         #endregion
        
@@ -148,7 +148,7 @@ public class EnemyMove : MonoBehaviour
             {
                 if (isDead) return;
                 isDead = true; //1번 실행
-                gameManager.AddScore(score);
+                GameManager.Instance.AddScore(score);
                 StartCoroutine(Dead());
             }
         }
@@ -185,14 +185,14 @@ public class EnemyMove : MonoBehaviour
    
     public void Despawn(GameObject Object)
     {
-        Object.transform.SetParent(gameManager.objectManager.transform, false);
+        Object.transform.SetParent(GameManager.Instance.objectManager.transform, false);
         Object.SetActive(false);
         State();
     }
     
          private void DespawnB(GameObject Object)
     {
-        Object.transform.SetParent(gameManager.poolManager.transform, false);
+        Object.transform.SetParent(GameManager.Instance.poolManager.transform, false);
         Object.SetActive(false);
     }
     public void State()

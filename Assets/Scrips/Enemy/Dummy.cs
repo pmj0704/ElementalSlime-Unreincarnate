@@ -103,7 +103,7 @@ public class Dummy : MonoBehaviour
             {
                 if (isDead) return;
                 isDead = true; 
-                gameManager.AddScore(100);
+                GameManager.Instance.AddScore(100);
                 StartCoroutine(Dead());
             }
         }
@@ -130,12 +130,12 @@ public class Dummy : MonoBehaviour
    
          private void DespawnB(GameObject Object)
     {
-        Object.transform.SetParent(gameManager.poolManager.transform, false);
+        Object.transform.SetParent(GameManager.Instance.poolManager.transform, false);
         Object.SetActive(false);
     }
     public void Despawn(GameObject Object)
     {
-        Object.transform.SetParent(gameManager.objectManager.transform, false);
+        Object.transform.SetParent(GameManager.Instance.objectManager.transform, false);
         Object.SetActive(false);
     }
 }

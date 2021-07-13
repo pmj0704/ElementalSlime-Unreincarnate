@@ -154,9 +154,9 @@ private IEnumerator Shoot()
 private GameObject ShootPool(int num)
     {
         GameObject result = null;
-        if (gameManager.enemyBulletManager.transform.childCount > 0)
+        if (GameManager.Instance.enemyBulletManager.transform.childCount > 0)
         {
-            result = gameManager.enemyBulletManager.transform.GetChild(0).gameObject;
+            result = GameManager.Instance.enemyBulletManager.transform.GetChild(0).gameObject;
             result.transform.position = ShootingPos[num].position;
             result.transform.SetParent(null);
             result.SetActive(true);

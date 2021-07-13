@@ -15,8 +15,8 @@ public class ItemMove : MonoBehaviour
     {
         transform.localScale = new Vector2 (1f, 1f);
         transform.Translate(Vector2.down * speed * Time.deltaTime);
-        if (transform.position.x > gameManager.MaxPosition.x) gameObject.SetActive(false);
-        if (transform.position.y < gameManager.MinPosition.y) gameObject.SetActive(false);
-        if (transform.position.x < gameManager.MinPosition.x) gameObject.SetActive(false);
+        if (transform.position.x > GameManager.Instance.MaxPosition.x) gameObject.SetActive(false);
+        if (transform.position.y < GameManager.Instance.MinPosition.y) gameObject.SetActive(false);
+        if (transform.position.x < GameManager.Instance.MinPosition.x) gameObject.SetActive(false);
     }
 }

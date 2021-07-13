@@ -19,8 +19,8 @@ public class WindMove : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.down * speed * Time.deltaTime);
-        if (transform.position.y < gameManager.MinPosition.y - 5f){
-        transform.SetParent(gameManager.windManager.transform, false);
+        if (transform.position.y < GameManager.Instance.MinPosition.y - 5f){
+        transform.SetParent(GameManager.Instance.windManager.transform, false);
         gameObject.SetActive(false);
         }
     }

@@ -44,8 +44,8 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            targetPosition.x = Mathf.Clamp(targetPosition.x, gameManager.MinPosition.x, gameManager.MaxPosition.x);
-            targetPosition.y = Mathf.Clamp(targetPosition.y, gameManager.MinPosition.y, gameManager.MaxPosition.y);
+            targetPosition.x = Mathf.Clamp(targetPosition.x, GameManager.Instance.MinPosition.x, GameManager.Instance.MaxPosition.x);
+            targetPosition.y = Mathf.Clamp(targetPosition.y, GameManager.Instance.MinPosition.y, GameManager.Instance.MaxPosition.y);
             transform.localPosition = Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
         }
 
@@ -71,10 +71,10 @@ public class PlayerMove : MonoBehaviour
    private GameObject InstantiateOrPool()
     {
         GameObject result = null;
-        if (gameManager.poolManager.transform.childCount > 0)
+        if (GameManager.Instance.poolManager.transform.childCount > 0)
         {
             audioSource.Play();
-            result = gameManager.poolManager.transform.GetChild(0).gameObject;
+            result = GameManager.Instance.poolManager.transform.GetChild(0).gameObject;
             result.transform.position = bulletPosition.position;
             result.transform.SetParent(null);
             result.SetActive(true);
@@ -109,7 +109,7 @@ public class PlayerMove : MonoBehaviour
                 Flame = false;
                 StartCoroutine(Blip(2));
                 animator.Play("Thunder");
-                gameManager.getLife(3);
+                GameManager.Instance.getLife(3);
                 bulletDelay = 0.5f;
                 Thunder = true;
                 break;
@@ -119,7 +119,7 @@ public class PlayerMove : MonoBehaviour
                 Harpy = false;
                 Flame = false;
                 StartCoroutine(Blip(2));
-                gameManager.getLife(6);
+                GameManager.Instance.getLife(6);
                 animator.Play("Stone");
                 Stone = true;
                 break;
@@ -129,7 +129,7 @@ public class PlayerMove : MonoBehaviour
                 Stone = false;
                 Harpy = false;
                 StartCoroutine(Blip(2));
-                gameManager.getLife(4);
+                GameManager.Instance.getLife(4);
                 animator.Play("Fire");
                 bulletDelay = 0.3f;
                 Flame = true;
@@ -139,14 +139,14 @@ public class PlayerMove : MonoBehaviour
                 Stone = false;
                 Flame = false;
                 StartCoroutine(Blip(2));
-                gameManager.getLife(4);
+                GameManager.Instance.getLife(4);
                 animator.Play("Harp");
                 bulletDelay = 0.2f;
                 Harpy = true;
                 break;
                 
                 case "Heart":
-                gameManager.getLife(4);
+                GameManager.Instance.getLife(4);
                 break;
             } 
         }
@@ -199,7 +199,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void Dead()
     {
-        gameManager.Dead();
+        GameManager.Instance.Dead();
         StartCoroutine(Blip(5));
     }
     public void SetDelay(float delay)

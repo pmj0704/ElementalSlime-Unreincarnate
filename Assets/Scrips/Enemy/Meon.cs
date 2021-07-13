@@ -56,7 +56,7 @@ private GameObject shot(int i)
     {
             GameObject result = null;
             if(enemyBulletManager.transform.childCount > 0) {
-            result = gameManager.enemyBulletManager.transform.GetChild(0).gameObject;
+            result = GameManager.Instance.enemyBulletManager.transform.GetChild(0).gameObject;
             Debug.Log(result);
             result.SetActive(true);
             result.transform.position = Vector2.zero;
@@ -81,7 +81,7 @@ private GameObject shot(int i)
     private void Despawn(GameObject GO)
     {
         dead = true;
-        GO.transform.SetParent(gameManager.enemyBulletManager.transform, false);
+        GO.transform.SetParent(GameManager.Instance.enemyBulletManager.transform, false);
         GO.SetActive(false);
     }
 }
